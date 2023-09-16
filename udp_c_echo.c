@@ -15,7 +15,6 @@ int main(){
     bind(fd,(struct sockaddr*)&servaddr,sizeof(servaddr));
     printf("enter msg ");
     fgets(str,100,stdin);
-    printf("(1) ",str);
     sendto(fd,str,100,0,(struct sockaddr*)&servaddr,cli_len);
     bzero(str,100);
     recvfrom(fd,str,100,0,(struct sockaddr*)&servaddr,&cli_len);
