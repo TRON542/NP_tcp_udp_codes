@@ -5,7 +5,7 @@
 #include <netdb.h>
 #include <unistd.h>
 int main(){
-    int str;
+    char str[100];
     struct sockaddr_in servaddr;
     int fd=socket(AF_INET,SOCK_STREAM,0);
     bzero(&servaddr,sizeof(servaddr));
@@ -15,10 +15,9 @@ int main(){
     bind(fd,(struct sockaddr *)&servaddr,sizeof(servaddr));
     listen(fd,10);
         int c_fd=accept(fd,(struct sockaddr*)NULL,NULL);
-        bzero(str,1);
-        recv(c_fd,str,1,0);
-        
-        printf("Echoing back %d",str*5);
-        send(c_fd,str*5,strlen(str),0);
+        bzero(str,100);
+        recv(c_fd,str,100,0);
+        printf("Echoing back %s",str);
+        send(c_fd,str,strlen(str),0);
         close(c_fd);
 }
